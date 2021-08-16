@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Fetch Planets</title>
+  <script>
+    window.addEventListener('load', function () {
+      let destination = document.getElementById('destination');
+      let addPlanet = document.getElementById('addPlanet');
+      fetch('https://handlers.education.launchcode.org/static/planets.json')
+        .then((response) => response.json()
+          .then((planet) => {
+            addPlanet.innerHTML = `Planet ${planet[0].name}`
+            destination.innerHTML = `<img src="${planet[0].image}" height="300px">`;
+            let i = 1;
+            addPlanet.addEventListener('click', function () {
+              addPlanet.innerHTML = `
+              Planet ${planet[i].name}`
+              destination.innerHTML = `<img src="${planet[i].image}" height="300px">`;
+              i = (i + 1) % planet.length;
+            });
+          })
+        );
+    });
+  </script>
+</head>
+
+<body>
+  <h1>Destination</h1>
+  <h3><span id="addPlanet"></span></h3>
+  <div id="destination">
+  </div>
+  <br>
+  <div class="json-answers" style="border-top: solid black 1px;">
+    <h3>26.5.1 JSON</h3>
+    <ol>
+      <li><strong>Snippet b</strong> is correct. Snippet a has no quote marks around the JSON object properties and
+        snippet b has single quotes around the
+        values. Correct JSON syntax requires double quotes around strings for properties and values.</li><br>
+      <li><strong>Snippet a</strong> is correct. Neither b nor c names the array which JSON, with its strict sytax
+        rules, won't tolerate. Also, I don't think JSON objects can begin with array brackets like in snippet c.</li>
+    </ol>
+  </div>
+</body>
+
+</html>
